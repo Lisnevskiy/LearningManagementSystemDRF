@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from course.models import Course
 from lesson.models import Lesson
+from lesson.serializers import LessonSerializer
 
 
 class CourseSerializer(serializers.ModelSerializer):
@@ -25,5 +26,21 @@ class CourseSerializer(serializers.ModelSerializer):
         """
         Метакласс для определения модели, которая будет сериализована, и полей, включая lessons_count.
         """
-        model = Course  # Указание модели Course
+        model = Course
         fields = ('pk', 'title', 'description', 'image', 'lessons_count')
+
+
+class CourseDetailSerializer(serializers.ModelSerializer):
+    """
+    Сериализатор для модели Course с выводом связанных уроков.
+    """
+
+    # Определение поля lesson с использованием LessonSerializer для сериализации уроков.
+    lesson = LessonSerializer(many=True, read_only=True)
+
+    class Meta:
+        """
+        Метакласс для определения модели, которая будет сериализована, и полей, включая lesson.
+        """
+        model = Course
+        fields = ('pk', 'title', 'description', 'image', 'lesson')
