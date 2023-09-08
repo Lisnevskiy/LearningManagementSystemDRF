@@ -1,0 +1,158 @@
+[
+  {
+    "model": "course.course",
+    "pk": 1,
+    "fields": {
+      "title": "1 курс",
+      "description": "Описание 1 курса",
+      "image": ""
+    }
+  },
+  {
+    "model": "course.course",
+    "pk": 2,
+    "fields": {
+      "title": "2 курс",
+      "description": "Описание 2 курса",
+      "image": ""
+    }
+  },
+  {
+    "model": "course.course",
+    "pk": 3,
+    "fields": {
+      "title": "3 курс",
+      "description": "Описание 3 курса",
+      "image": ""
+    }
+  },
+  {
+    "model": "course.course",
+    "pk": 4,
+    "fields": {
+      "title": "4 курс",
+      "description": "Описание 4 курса",
+      "image": ""
+    }
+  },
+  {
+    "model": "lesson.lesson",
+    "pk": 1,
+    "fields": {
+      "title": "1 урок",
+      "description": "Описание 1 урока",
+      "image": "",
+      "video_url": "https://www.youtube.com/",
+      "course": 1
+    }
+  },
+  {
+    "model": "lesson.lesson",
+    "pk": 2,
+    "fields": {
+      "title": "2 урок",
+      "description": "Описание 2 урока",
+      "image": "",
+      "video_url": "https://www.youtube.com/",
+      "course": 2
+    }
+  },
+  {
+    "model": "lesson.lesson",
+    "pk": 3,
+    "fields": {
+      "title": "3 урок",
+      "description": "Описание 3 урока",
+      "image": "",
+      "video_url": "https://www.youtube.com/",
+      "course": 3
+    }
+  },
+  {
+    "model": "lesson.lesson",
+    "pk": 4,
+    "fields": {
+      "title": "4 урок",
+      "description": "Описание 4 урока",
+      "image": "",
+      "video_url": "https://www.youtube.com/",
+      "course": 1
+    }
+  },
+  {
+    "model": "payment.payment",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "course": 1,
+      "lesson": null,
+      "payment_date": "2023-09-05",
+      "amount": "50.00",
+      "payment_method": "cash"
+    }
+  },
+  {
+    "model": "payment.payment",
+    "pk": 2,
+    "fields": {
+      "user": 2,
+      "course": null,
+      "lesson": 2,
+      "payment_date": "2023-09-06",
+      "amount": "75.50",
+      "payment_method": "transfer"
+    }
+  },
+  {
+    "model": "payment.payment",
+    "pk": 3,
+    "fields": {
+      "user": 1,
+      "course": null,
+      "lesson": 2,
+      "payment_date": "2023-09-07",
+      "amount": "75.50",
+      "payment_method": "transfer"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 1,
+    "fields": {
+      "password": "",
+      "last_login": null,
+      "is_superuser": false,
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2023-09-08T11:22:54.454Z",
+      "email": "Lisnevskiy14@gmail.com",
+      "first_name": null,
+      "last_name": null,
+      "phone": null,
+      "city": null,
+      "avatar": "",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 2,
+    "fields": {
+      "password": "",
+      "last_login": null,
+      "is_superuser": false,
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2023-09-08T11:23:06.786Z",
+      "email": "14@gmail.com",
+      "first_name": null,
+      "last_name": null,
+      "phone": null,
+      "city": null,
+      "avatar": "",
+      "groups": [],
+      "user_permissions": []
+    }
+  }
+]
