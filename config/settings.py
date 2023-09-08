@@ -35,6 +35,7 @@ INSTALLED_APPS = [
 
     "course.apps.CourseConfig",
     "lesson.apps.LessonConfig",
+    "payment.apps.PaymentConfig",
     "users.apps.UsersConfig",
 ]
 
