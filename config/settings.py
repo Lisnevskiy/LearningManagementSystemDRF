@@ -32,9 +32,11 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
 
     "rest_framework",
+    "django_filters",
 
     "course.apps.CourseConfig",
     "lesson.apps.LessonConfig",
+    "payment.apps.PaymentConfig",
     "users.apps.UsersConfig",
 ]
 
