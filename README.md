@@ -8,12 +8,13 @@ LMS-система разработана с использованием SPA (S
 
 ## Установка и запуск
 
-1. Клонируйте репозиторий на вашем компьютере:
+- Клонируйте репозиторий на вашем компьютере:
 `git clone https://github.com/Lisnevskiy/MailingManagementService.git`
-2. Установите зависимости:
+- Установите зависимости:
 `pip install -r requirements.txt`
-3. Выполните миграции базы данных:
+- Необходимые примеры переменных окружения указаны в файле [.env.sample](.env.sample)
+- Выполните миграции базы данных:
 `python manage.py migrate`
-4. Запустите сервер:
+- Наполение БД с помощью фикстур: `python manage.py loaddata data.json`
+- Запустите сервер:
 `python manage.py runserver`
-5. Необходимые примеры переменных окружения указаны в файле [.env.sample](.env.sample)
