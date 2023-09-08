@@ -1,6 +1,6 @@
 from rest_framework import serializers
-from course.models import Course  # Импорт модели Course
-from lesson.models import Lesson  # Импорт модели Lesson
+from course.models import Course
+from lesson.models import Lesson
 
 
 class CourseSerializer(serializers.ModelSerializer):
@@ -27,4 +27,3 @@ class CourseSerializer(serializers.ModelSerializer):
         """
         model = Course  # Указание модели Course
         fields = ('pk', 'title', 'description', 'image', 'lessons_count')
-        # Включение полей в сериализацию, включая lessons_count
