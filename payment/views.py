@@ -7,13 +7,19 @@ from payment.serializers import PaymentSerializer
 
 
 class PaymentListView(generics.ListAPIView):
-    queryset = Payment.objects.all()
-    serializer_class = PaymentSerializer
-    filter_backends = (DjangoFilterBackend, OrderingFilter,)
-    filterset_fields = ('course', 'lesson', 'payment_method')
-    ordering_fields = ('payment_date',)
+    """
+    Представление для вывода списка платежей с поддержкой фильтрации и сортировки.
+    """
+    queryset = Payment.objects.all()  # Запрос для получения всех платежей
+    serializer_class = PaymentSerializer  # Сериализатор для преобразования данных платежей
+    filter_backends = (DjangoFilterBackend, OrderingFilter,)  # Подключение фильтров и сортировки
+    filterset_fields = ('course', 'lesson', 'payment_method')  # Поля для фильтрации
+    ordering_fields = ('payment_date',)  # Поля для сортировки
 
 
 class PaymentDetailView(generics.RetrieveAPIView):
-    queryset = Payment.objects.all()
-    serializer_class = PaymentSerializer
+    """
+    Представление для вывода деталей платежа.
+    """
+    queryset = Payment.objects.all()  # Запрос для получения всех платежей
+    serializer_class = PaymentSerializer  # Сериализатор для преобразования данных платежа
