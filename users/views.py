@@ -1,7 +1,7 @@
 from rest_framework import generics
 
 from users.models import User
-from users.serializers import UserSerializer, UserDetailSerializer
+from users.serializers import UserSerializer, UserDetailSerializer, UserRegisterSerializer
 
 
 class UserListView(generics.ListAPIView):
@@ -15,8 +15,25 @@ class UserDetailView(generics.RetrieveAPIView):
 
 
 class UserCreateView(generics.CreateAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+    """
+    Представление для создания нового пользователя.
+    """
+    serializer_class = UserRegisterSerializer
+
+    def perform_create(self, serializer):
+        """
+        Метод для создания нового пользователя с установленным паролем.
+        Args:
+            serializer: Сериализатор UserRegisterSerializer для сохранения данных пользователя.
+        """
+        password = self.request.data.get('password')  # Получение пароля из запроса
+        user = serializer.save()  # Создание нового пользователя
+
+        # Установка пароля для пользователя.
+        # Пароль хэшируется перед сохранением.
+        user.set_password(password)
+
+        user.save()  # Сохраняем пользователя в базе данных
 
 
 class UserUpdateView(generics.UpdateAPIView):
