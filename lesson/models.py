@@ -2,6 +2,7 @@ from django.db import models
 
 from constants import NULLABLE
 from course.models import Course
+from users.models import User
 
 
 class Lesson(models.Model):
@@ -12,6 +13,8 @@ class Lesson(models.Model):
     # video_link = models.CharField(max_length=200, verbose_name='ссылка на видео', **NULLABLE)
 
     course = models.ForeignKey(Course, on_delete=models.CASCADE, verbose_name='курс', related_name='lesson')
+
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='владелец')
 
     def __str__(self):
         return self.title
