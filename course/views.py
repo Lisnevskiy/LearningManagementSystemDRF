@@ -1,6 +1,8 @@
 from rest_framework import viewsets
+
 from course.models import Course
 from course.serializers import CourseSerializer, CourseDetailSerializer
+from users.permissions import IsOwner, IsStaff
 
 
 class CourseViewSet(viewsets.ModelViewSet):
@@ -18,3 +20,22 @@ class CourseViewSet(viewsets.ModelViewSet):
         if self.action == 'retrieve':
             return CourseDetailSerializer  # Используется при просмотре одного курса
         return CourseSerializer  # Используется для других действий (список, создание, обновление и удаление)
+
+    def perform_create(self, serializer):
+        """
+        Метод выполняется при создании нового курса и делает текущего пользователя владельцем этого курса.
+        """
+        course = serializer.save()
+        course.owner = self.request.user
+        course.save()
+
+    def get_permissions(self):
+        """
+        Метод определяет, какие разрешения применять в зависимости от действия в представлении.
+        """
+        if self.action in ['list', 'retrieve']:
+            permission_classes = [IsOwner | IsStaff]
+        else:
+            permission_classes = [IsOwner]
+
+        return [permission() for permission in permission_classes]

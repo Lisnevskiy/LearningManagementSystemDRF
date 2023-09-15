@@ -2,7 +2,8 @@ from rest_framework import generics
 from rest_framework.permissions import AllowAny
 
 from users.models import User
-from users.serializers import UserSerializer, UserDetailSerializer, UserRegisterSerializer
+from users.permissions import IsUser
+from users.serializers import UserSerializer, UserDetailSerializer, UserRegisterSerializer, UserOwnerDetailSerializer
 
 
 class UserListView(generics.ListAPIView):
@@ -11,8 +12,21 @@ class UserListView(generics.ListAPIView):
 
 
 class UserDetailView(generics.RetrieveAPIView):
+    """
+    Представление для просмотра подробной информации о пользователе.
+    """
     queryset = User.objects.all()
-    serializer_class = UserDetailSerializer
+
+    def get_serializer_class(self):
+        """
+        Метод для определения класса сериализатора в зависимости от текущего пользователя.
+        Returns:
+            class: Класс сериализатора, который будет использоваться для этого запроса.
+        """
+        user = self.get_object()
+        if self.request.user == user:
+            return UserOwnerDetailSerializer
+        return UserDetailSerializer
 
 
 class UserCreateView(generics.CreateAPIView):
@@ -41,8 +55,10 @@ class UserCreateView(generics.CreateAPIView):
 class UserUpdateView(generics.UpdateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    permission_classes = [IsUser]
 
 
 class UserDeleteView(generics.DestroyAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    permission_classes = [IsUser]
