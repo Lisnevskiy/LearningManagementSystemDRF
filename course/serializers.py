@@ -27,7 +27,7 @@ class CourseSerializer(serializers.ModelSerializer):
         Метакласс для определения модели, которая будет сериализована, и полей, включая lessons_count.
         """
         model = Course
-        fields = ('pk', 'title', 'description', 'image', 'lessons_count')
+        fields = ('pk', 'title', 'description', 'image', 'owner', 'lessons_count')
 
 
 class CourseDetailSerializer(serializers.ModelSerializer):
@@ -43,4 +43,4 @@ class CourseDetailSerializer(serializers.ModelSerializer):
         Метакласс для определения модели, которая будет сериализована, и полей, включая lesson.
         """
         model = Course
-        fields = ('pk', 'title', 'description', 'image', 'lesson')
+        fields = ('pk', 'title', 'description', 'image', 'lesson', 'owner')
