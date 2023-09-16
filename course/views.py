@@ -1,4 +1,5 @@
 from rest_framework import viewsets
+from rest_framework.permissions import AllowAny
 
 from course.models import Course
 from course.serializers import CourseSerializer, CourseDetailSerializer
@@ -34,7 +35,7 @@ class CourseViewSet(viewsets.ModelViewSet):
         Метод определяет, какие разрешения применять в зависимости от действия в представлении.
         """
         if self.action in ['list', 'retrieve']:
-            permission_classes = [IsOwner | IsStaff]
+            permission_classes = [AllowAny]
         else:
             permission_classes = [IsOwner]
 
