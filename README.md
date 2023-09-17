@@ -15,6 +15,7 @@ LMS-система разработана с использованием SPA (S
 - Необходимые примеры переменных окружения указаны в файле [.env.sample](.env.sample)
 - Выполните миграции базы данных:
 `python manage.py migrate`
+- Создайте суперпользователя `python manage.py create_sup_us`
 - Наполение БД с помощью фикстур: `python manage.py loaddata data.json`
 - Запустите сервер:
 `python manage.py runserver`

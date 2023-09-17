@@ -9,7 +9,7 @@ class Course(models.Model):
     description = models.TextField(verbose_name='содержание')
     image = models.ImageField(upload_to='course/', verbose_name='изображение', **NULLABLE)
 
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='владелец')
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='владелец', **NULLABLE)
 
     def __str__(self):
         return self.title

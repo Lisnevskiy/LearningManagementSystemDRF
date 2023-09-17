@@ -1,8 +1,10 @@
 from rest_framework import viewsets
+from rest_framework.permissions import AllowAny
 
 from course.models import Course
+from course.paginators import CourseSetPagination
 from course.serializers import CourseSerializer, CourseDetailSerializer
-from users.permissions import IsOwner, IsStaff
+from users.permissions import IsOwner
 
 
 class CourseViewSet(viewsets.ModelViewSet):
@@ -10,6 +12,7 @@ class CourseViewSet(viewsets.ModelViewSet):
     Представление для модели Course, обеспечивающее CRUD-операции и настройку сериализатора.
     """
     queryset = Course.objects.all()  # Запрос к модели Course для получения данных
+    pagination_class = CourseSetPagination
 
     def get_serializer_class(self):
         """
@@ -34,7 +37,7 @@ class CourseViewSet(viewsets.ModelViewSet):
         Метод определяет, какие разрешения применять в зависимости от действия в представлении.
         """
         if self.action in ['list', 'retrieve']:
-            permission_classes = [IsOwner | IsStaff]
+            permission_classes = [AllowAny]
         else:
             permission_classes = [IsOwner]
 
