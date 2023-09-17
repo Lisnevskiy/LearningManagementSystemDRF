@@ -1,6 +1,7 @@
 from rest_framework import generics
 
 from lesson.models import Lesson
+from lesson.paginators import LessonSetPagination
 from lesson.serializers import LessonSerializer
 from users.permissions import IsOwner, IsStaff
 
@@ -9,6 +10,7 @@ class LessonListView(generics.ListAPIView):
     queryset = Lesson.objects.all()
     serializer_class = LessonSerializer
     permission_classes = [IsOwner | IsStaff]
+    pagination_class = LessonSetPagination
 
 
 class LessonDetailView(generics.RetrieveAPIView):
