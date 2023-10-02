@@ -31,10 +31,10 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 
-    "drf_yasg",
-
     "rest_framework",
     "django_filters",
+    "drf_yasg",
+    "django_celery_beat",
 
     "course.apps.CourseConfig",
     "lesson.apps.LessonConfig",
@@ -147,3 +147,7 @@ REST_FRAMEWORK = {
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 STRIPE_SECRET_KEY = os.getenv("STRIPE_SECRET_KEY")
+
+CELERY_BROKER_URL = os.getenv('REDIS_HOST')
+CELERY_RESULT_BACKEND = os.getenv('REDIS_HOST')
+CELERY_TASK_TRACK_STARTED = True
