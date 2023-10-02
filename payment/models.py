@@ -19,7 +19,8 @@ class Payment(models.Model):
         User,
         on_delete=models.CASCADE,
         related_name='payment',  # Обратная связь для пользователя
-        verbose_name='пользователь'
+        verbose_name='пользователь',
+        **NULLABLE
     )
     course = models.ForeignKey(
         Course,
@@ -38,6 +39,11 @@ class Payment(models.Model):
     payment_date = models.DateField(auto_now_add=True, verbose_name='дата оплаты')
     amount = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='сумма оплаты')
     payment_method = models.CharField(max_length=20, choices=PAYMENT_METHOD_CHOICES, verbose_name='способ оплаты')
+    payment_client_secret = models.CharField(
+        max_length=100,
+        verbose_name='секретный ключ платежа пользователя',
+        **NULLABLE
+    )
 
     def __str__(self):
         return f"Платеж от {self.user}"
