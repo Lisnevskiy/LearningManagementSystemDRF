@@ -1,4 +1,5 @@
 import os
+from datetime import timedelta
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -148,6 +149,19 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 STRIPE_SECRET_KEY = os.getenv("STRIPE_SECRET_KEY")
 
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 465
+EMAIL_USE_SSL = True
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")  # адрес электронной почты отправителя (ваш аккаунт)
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")  # пароль от аккаунта
+
 CELERY_BROKER_URL = os.getenv('REDIS_HOST')
 CELERY_RESULT_BACKEND = os.getenv('REDIS_HOST')
 CELERY_TASK_TRACK_STARTED = True
+
+CELERY_BEAT_SCHEDULE = {
+    'check-if-user-is-active': {
+        'task': 'users.tasks.check_inactive_users',
+        'schedule': timedelta(seconds=15),
+    },
+}

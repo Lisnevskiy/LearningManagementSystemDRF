@@ -4,6 +4,7 @@ from lesson.models import Lesson
 from lesson.paginators import LessonSetPagination
 from lesson.serializers import LessonSerializer
 from users.permissions import IsOwner, IsStaff
+from lesson.tasks import send_update_email
 
 
 class LessonListView(generics.ListAPIView):
@@ -31,6 +32,7 @@ class LessonCreateView(generics.CreateAPIView):
         """
         lesson = serializer.save()
         lesson.owner = self.request.user
+        send_update_email.delay()
         lesson.save()
 
 
