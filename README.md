@@ -17,5 +17,6 @@ LMS-система разработана с использованием SPA (S
 `python manage.py migrate`
 - Создайте суперпользователя `python manage.py create_sup_us`
 - Наполение БД с помощью фикстур: `python manage.py loaddata data.json`
-- Запустите сервер:
-`python manage.py runserver`
+- Запустите докер:
+`docker compose build`
+`docker compose up`
