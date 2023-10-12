@@ -1,0 +1,57 @@
+version: "3.11"
+
+services:
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+
+  db:
+    image: postgres
+    environment:
+      POSTGRES_DB: ${POSTGRESQL_DB_NAME}
+      POSTGRES_USER: ${POSTGRESQL_USER_NAME}
+      POSTGRES_PASSWORD: ${POSTGRESQL_PASSWORD}
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  api:
+    build: .
+    tty: true
+#    command: python manage.py migrate && python manage.py runserver 0.0.0.0:8000
+#    command: python manage.py migrate ; python manage.py runserver 0.0.0.0:8000
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code
+    restart: on-failure
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  celery:
+    build: .
+    tty: true
+    command: celery -A config worker -l INFO -P eventlet
+    depends_on:
+      - redis
+      - api
+
+  celery_beat:
+    build: .
+    tty: true
+    command: celery -A config beat -l INFO
+    depends_on:
+      - redis
+      - api
+
+volumes:
+  pgdata:
